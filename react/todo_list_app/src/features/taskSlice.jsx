@@ -14,7 +14,7 @@ export const fetchTodo = createAsyncThunk('tasks/fetchTodo', async () => {
     id: task.id,
     title: task.title,
     description: '',
-    status: task.completed ? 'completed' : 'To Do',
+    status: task.completed ? 'Completed' : 'To Do',
   }
 ))
 })
@@ -23,7 +23,9 @@ const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-
+    addTask: (state, action) => {
+      state.tasks.push(action.payload);
+    },
 
   },
   extraReducers: (builder) => {
@@ -44,4 +46,5 @@ const taskSlice = createSlice({
 
 });
 
+export const { addTask } = taskSlice.actions;
 export default taskSlice.reducer;

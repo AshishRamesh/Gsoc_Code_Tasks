@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTodo } from "../features/taskSlice";
+import EditTask from "./EditTask";
 
 const TaskList = () => {
     const tasks = useSelector((state) => state.tasks.tasks);
@@ -23,9 +24,9 @@ const TaskList = () => {
     
 
     return (
-        <div>
+        <div className="bg-black-50">
             <div>
-                <h2>Tasks</h2>
+                <h2 className="text-lg font-large text-gray-1000 justify-between">Tasks</h2>
                 <ul className="space-y-4">
                     {tasks.map((task) => (
                         <li key={task.id} className="bg-gray-50 p-4 rounded-md shadow-sm flex justify-between items-center">
@@ -37,8 +38,7 @@ const TaskList = () => {
                                 </p>
                             </div>     
                             <div className= "flex space-x-2">
-                                <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-red-600">
-                                    Edit</button>
+                                <EditTask task={task}/>
                                 <button className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">
                                     Delete</button>
                             </div>                   
