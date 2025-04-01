@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   error: null,
   status: 'All',
+  searchQuery: "",
 };
 
 export const fetchTodo = createAsyncThunk('tasks/fetchTodo', async () => {
@@ -20,21 +21,26 @@ export const fetchTodo = createAsyncThunk('tasks/fetchTodo', async () => {
 })
 
 const taskSlice = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState,
   reducers: {
     addTask: (state, action) => {
       state.tasks.push(action.payload);
     },
     editTask: (state, action) => {
-      state.tasks = state.tasks.map(task =>(
+      state.tasks = state.tasks.map(task =>
         task.id === action.payload.id ? action.payload : task
-      ))
+      );
     },
     deleteTask: (state, action) => {
       state.tasks = state.tasks.filter(task => task.id !== action.payload);
-    }
-
+    },
+    setFilterStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,9 +56,8 @@ const taskSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-  }
-
+  },
 });
 
-export const { addTask, editTask, deleteTask} = taskSlice.actions;
+export const { addTask, editTask, deleteTask, setFilterStatus, setSearchQuery } = taskSlice.actions;
 export default taskSlice.reducer;
