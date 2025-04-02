@@ -7,6 +7,8 @@ const EditTask = ({task}) => {
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [status, setStatus] = useState(task.status);
+    const [priority, setPriority] = useState(task.priority || 'medium'); // New State
+    const [category, setCategory] = useState(task.category || 'personal'); // New State
     const dispatch = useDispatch();
     const handleEdit = () => {
         dispatch(editTask({id: task.id, title, description, status}));
@@ -48,6 +50,27 @@ const EditTask = ({task}) => {
                         </select>
 
                     </div>
+                    <div className="mb-4">
+                    <select 
+                        value={priority}
+                        onChange={(e) => setPriority(e.target.value)}
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="high">High Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="low">Low Priority</option>
+                    </select>
+                </div>
+
+                <div className="mb-4">
+                    <select 
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="groceries">Groceries</option>
+                    </select>
+                </div>
                     <div className="flex justify-between">
                         <button
                         type="submit"

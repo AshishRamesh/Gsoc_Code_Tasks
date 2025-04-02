@@ -15,18 +15,17 @@ const FilterTask = () => {
         value={searchQuery}
         onChange={(e) => dispatch(setSearchQuery(e.target.value))}
         placeholder="Search tasks..."
-        className="border p-2 rounded-md w-full md:w-2/3 "
+        className="border p-2 rounded-md w-full md:w-2/3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
 
       {/* Filter Dropdown */}
       <select
         value={status}
         onChange={(e) => dispatch(setFilterStatus(e.target.value))}
-        className="border p-2 rounded-md w-full md:w-1/3 fouces:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="border p-2 rounded-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       >
         <option value="All">All</option>
         <option value="To Do">To Do</option>
-        <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
       </select>
     </div>

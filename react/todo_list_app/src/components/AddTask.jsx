@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { v4 as uuid4 } from "uuid";
 import { addTask } from "../features/taskSlice";
 
-const AddTask = ({ onTaskAdded }) => { // Accept the function as a prop
+const AddTask = ({ onTaskAdded }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState('todo');
+    const [priority, setPriority] = useState('medium'); // New State
+    const [category, setCategory] = useState('personal'); // New State
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
@@ -18,13 +20,17 @@ const AddTask = ({ onTaskAdded }) => { // Accept the function as a prop
             title,
             description,
             status: status === "todo" ? "To Do" : status === "in-progress" ? "In Progress" : "Completed",
+            priority, // Store priority
+            category, // Store category
         };
 
         dispatch(addTask(newTask));
         setTitle('');
         setDescription('');
         setStatus('todo');
-        onTaskAdded(); // Call the function to close AddTask
+        setPriority('medium'); // Reset to default
+        setCategory('personal'); // Reset to default
+        onTaskAdded();
     };
 
     return (
@@ -49,6 +55,32 @@ const AddTask = ({ onTaskAdded }) => { // Accept the function as a prop
                     rows="3"
                 />
             </div>
+
+            {/* Priority Selection */}
+            <div className="mb-4">
+                <select
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                    className="border p-2 rounded-md w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                    <option value="high">High Priority</option>
+                    <option value="medium">Medium Priority</option>
+                    <option value="low">Low Priority</option>
+                </select>
+          
+
+            {/* Category Selection */}
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="border p-2 rounded-md w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="groceries">Groceries</option>
+                </select>
+            </div>
+
             <div className="mb-4">
                 <select
                     value={status}
@@ -60,6 +92,8 @@ const AddTask = ({ onTaskAdded }) => { // Accept the function as a prop
                     <option value="done">Completed</option>
                 </select>
             </div>
+
+            
             <button
                 type="submit"
                 className="w-full bg-indigo-600 text-white font-semibold p-2 rounded-md hover:bg-indigo-700"
