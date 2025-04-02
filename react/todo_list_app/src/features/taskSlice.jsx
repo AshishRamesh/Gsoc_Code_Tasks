@@ -7,6 +7,8 @@ const initialState = {
   status: 'All',
   searchQuery: "",
   sortBy: "title",  // Default sorting
+  priority: "medium", // Default priority
+  category: "Personal", // Default category
 };
 
 export const fetchTodo = createAsyncThunk('tasks/fetchTodo', async () => {

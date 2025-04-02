@@ -8,10 +8,17 @@ const EditTask = ({task}) => {
     const [description, setDescription] = useState(task.description);
     const [status, setStatus] = useState(task.status);
     const [priority, setPriority] = useState(task.priority || 'medium'); // New State
-    const [category, setCategory] = useState(task.category || 'personal'); // New State
+    const [category, setCategory] = useState(task.category || 'Personal'); // New State
+    
+    const priorityColors = {
+        high: " text-red-500", 
+        medium: " text-yellow-600", 
+        low: " text-green-500"
+    };
+    
     const dispatch = useDispatch();
     const handleEdit = () => {
-        dispatch(editTask({id: task.id, title, description, status}));
+        dispatch(editTask({id: task.id, title, description, status, priority, category}));
         setIsEditing(false);    
     }
     return (
@@ -25,7 +32,7 @@ const EditTask = ({task}) => {
                         placeholder="Task Name"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md fouces:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                         />
 
@@ -35,7 +42,7 @@ const EditTask = ({task}) => {
                         placeholder="Task Description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md fouces:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         rows="3">
                         </textarea>
                     </div> 
@@ -43,10 +50,10 @@ const EditTask = ({task}) => {
                         <select 
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md fouces:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="todo">To Do</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="done">Completed</option>
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus: ${priorityColors[priority]}`}>
+                            <option value="To Do">To Do</option>
+                            <option value="In-Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
                         </select>
 
                     </div>
@@ -66,9 +73,9 @@ const EditTask = ({task}) => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="personal">Personal</option>
-                        <option value="work">Work</option>
-                        <option value="groceries">Groceries</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="Groceries">Groceries</option>
                     </select>
                 </div>
                     <div className="flex justify-between">

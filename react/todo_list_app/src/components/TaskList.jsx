@@ -11,7 +11,11 @@ const TaskList = () => {
   const searchQuery = useSelector((state) => state.tasks.searchQuery);
   const dispatch = useDispatch();
   
-
+  const priorityColors = {
+    high: " text-red-500", 
+    medium: " text-yellow-600", 
+    low: " text-green-500"
+};
 
 
   useEffect(() => {
@@ -43,12 +47,15 @@ const TaskList = () => {
       <ul className="space-y-4">
         {filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
-            <li key={task.id} className="bg-gray-50 p-4 rounded-md shadow-sm flex justify-between items-center">
+            <li key={task.id} className="bg-gray-50 p-4 rounded-md shadow-sm flex justify-between items-center hover:shadow-lg transition-shadow duration-200">
               <div>
-                <h3 className="text-lg font-medium text-gray-800">{task.title}</h3>
+                <h1 className="text-lg font-bold text-gray-800">{task.title}</h1>
                 {task.description && <p className="text-gray-600">{task.description}</p>}
-                <p className="mt-1 text-sm font-semibold">
-                  Status: <span className="italic underline">{task.status}</span>
+                <p className="mt-1 text-sm ">
+                  Status: <span className={`italic font-bold ${priorityColors[task.priority || 'medium']}` }>{task.status}</span>
+                  <div>
+                  Category: <span className={`italic font-bold` }>{task.category || 'Personal'}</span>
+                  </div>
                 </p>
               </div>
               <div className="flex space-x-2">
