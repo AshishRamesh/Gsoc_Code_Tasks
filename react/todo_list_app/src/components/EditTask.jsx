@@ -1,6 +1,7 @@
 import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import { editTask } from "../features/taskSlice";
+import { Pencil } from "lucide-react";
 
 const EditTask = ({task}) => {
     const [isEdit, setIsEditing] = useState(false);
@@ -94,9 +95,13 @@ const EditTask = ({task}) => {
                 </div>
         ) : (
             <>
-            <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            onClick={() => setIsEditing(true)}>
-            Edit</button>
+            <button
+            className="w-8 h-8 flex items-center justify-center bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            onClick={() => setIsEditing(true)}
+            >
+            <Pencil size={18} />
+            </button>
+
             </>
         )}
         </div>

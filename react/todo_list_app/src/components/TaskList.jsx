@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTask, fetchTodo, updateTask } from "../features/taskSlice";
 import EditTask from "./EditTask";
+import { Trash2 } from "lucide-react";
 import {
   DragDropContext,
   Droppable,
@@ -64,7 +65,7 @@ const TaskList = () => {
 
   return (
     <div className="bg-black-50">
-      <h2 className="text-lg font-large text-gray-1000 mb-4">Tasks</h2>
+      {/* <h2 className="text-lg font-large text-gray-1000 mb-4">Tasks</h2> */}
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Object.entries(columns).map(([columnId, taskList]) => (
@@ -75,7 +76,7 @@ const TaskList = () => {
                   {...provided.droppableProps}
                   className="bg-gray-100 rounded-md p-4 shadow-inner min-h-[300px]"
                 >
-                  <h2 className="text-lg font-bold text-center text-indigo-700 mb-2">{columnId}</h2>
+                  <h3 className="text-lg font-bold text-center text-indigo-700 mb-2">{columnId}</h3>
                   {taskList.map((task, index) => (
                     <Draggable draggableId={task.id.toString()} index={index} key={task.id}>
                       {(provided) => (
@@ -96,11 +97,11 @@ const TaskList = () => {
                           <div className="flex space-x-2 mt-2">
                             <EditTask task={task} />
                             <button
-                              className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                              onClick={() => handleDelete(task.id)}
-                            >
-                              Delete
-                            </button>
+                            className="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-md hover:bg-red-600"
+                            onClick={() => handleDelete(task.id)}>
+                            <Trash2 size={18} />
+                          </button>
+
                           </div>
                         </div>
                       )}
