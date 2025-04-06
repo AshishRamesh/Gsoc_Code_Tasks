@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTask, fetchTodo } from "../features/taskSlice";
+import { deleteTask, fetchTodo, updateTask } from "../features/taskSlice";
 import EditTask from "./EditTask";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable
+} from "react-beautiful-dnd";
 
 const TaskList = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -10,13 +15,12 @@ const TaskList = () => {
   const status = useSelector((state) => state.tasks.status);
   const searchQuery = useSelector((state) => state.tasks.searchQuery);
   const dispatch = useDispatch();
-  
-  const priorityColors = {
-    high: " text-red-500", 
-    medium: " text-yellow-600", 
-    low: " text-green-500"
-};
 
+  const priorityColors = {
+    high: "text-red-500",
+    medium: "text-yellow-600",
+    low: "text-green-500"
+  };
 
   useEffect(() => {
     dispatch(fetchTodo());
@@ -26,53 +30,89 @@ const TaskList = () => {
     dispatch(deleteTask(id));
   };
 
-  if (loading) {
-    return <div>Task Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  // **Filter & Search Logic**
   const filteredTasks = tasks.filter((task) => {
     const matchesStatus = status === "All" || task.status === status;
     const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesStatus && matchesSearch;
   });
 
+  const columns = {
+    "To Do": [],
+    "In Progress": [],
+    "Completed": [],
+  };
+
+  filteredTasks.forEach(task => {
+    if (columns[task.status]) {
+      columns[task.status].push(task);
+    }
+  });
+
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination || destination.droppableId === source.droppableId) return;
+
+    const draggedTask = tasks.find((t) => t.id.toString() === draggableId);
+    if (draggedTask) {
+      dispatch(updateTask({ id: draggedTask.id, newStatus: destination.droppableId }));
+    }
+  };
+
+  if (loading) return <div>Task Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="bg-black-50">
-      <h2 className="text-lg font-large text-gray-1000 justify-between">Tasks</h2>
-      <ul className="space-y-4">
-        {filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => (
-            <li key={task.id} className="bg-gray-50 p-4 rounded-md shadow-sm flex justify-between items-center hover:shadow-lg transition-shadow duration-200">
-              <div>
-                <h1 className="text-lg font-bold text-gray-800">{task.title}</h1>
-                {task.description && <p className="text-gray-600">{task.description}</p>}
-                <p className="mt-1 text-sm ">
-                  Status: <span className={`italic font-bold ${priorityColors[task.priority || 'medium']}` }>{task.status}</span>
-                  <div>
-                  Category: <span className={`italic font-bold` }>{task.category || 'Personal'}</span>
-                  </div>
-                </p>
-              </div>
-              <div className="flex space-x-2">
-                <EditTask task={task} />
-                <button
-                  className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                  onClick={() => handleDelete(task.id)}
+      <h2 className="text-lg font-large text-gray-1000 mb-4">Tasks</h2>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {Object.entries(columns).map(([columnId, taskList]) => (
+            <Droppable droppableId={columnId} key={columnId}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className="bg-gray-100 rounded-md p-4 shadow-inner min-h-[300px]"
                 >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))
-        ) : (
-          <p className="text-gray-500">No tasks found</p>
-        )}
-      </ul>
+                  <h2 className="text-lg font-bold text-center text-indigo-700 mb-2">{columnId}</h2>
+                  {taskList.map((task, index) => (
+                    <Draggable draggableId={task.id.toString()} index={index} key={task.id}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="bg-white p-4 rounded shadow-sm mb-2 hover:shadow-lg transition-shadow duration-200"
+                        >
+                          <h1 className="text-lg font-bold text-gray-800">{task.title}</h1>
+                          {task.description && <p className="text-gray-600">{task.description}</p>}
+                          <p className="mt-1 text-sm">
+                            Status: <span className={`italic font-bold ${priorityColors[task.priority || 'medium']}`}>{task.status}</span>
+                          </p>
+                          <p className="text-sm">
+                            Category: <span className="italic font-bold">{task.category || 'Personal'}</span>
+                          </p>
+                          <div className="flex space-x-2 mt-2">
+                            <EditTask task={task} />
+                            <button
+                              className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                              onClick={() => handleDelete(task.id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </div>
+      </DragDropContext>
     </div>
   );
 };

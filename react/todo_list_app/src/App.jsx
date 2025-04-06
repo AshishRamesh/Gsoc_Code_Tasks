@@ -16,16 +16,16 @@ function App() {
 
     return (
         <div className="min-h-screen bg-gray-100 p-4">
-            <div className="max-w-2xl mx-auto bg-white shadow-md rounded-md p-6">
+            <div className=" mx-auto bg-white shadow-md rounded-md p-6">
                 <h1 className="text-3xl font-bold mb-4 text-center text-indigo-600">Todo List</h1>
                 <div>
                     <FilterTask />
                 </div>
-                <div>
+                <div className="">
                     {!showAddTask && ( // Only show the button if the form isn't displayed
                         <button
                             onClick={handleAddTaskClick}
-                            className="w-full bg-indigo-600 text-white font-semibold p-2 rounded-md hover:bg-indigo-700 mb-4"
+                            className=" w-full bg-indigo-600 text-white font-semibold p-2 rounded-md hover:bg-indigo-700 mb-4"
                         >
                             Add New Task
                         </button>

@@ -46,7 +46,7 @@ const EditTask = ({task}) => {
                         rows="3">
                         </textarea>
                     </div> 
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                         <select 
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
@@ -56,7 +56,7 @@ const EditTask = ({task}) => {
                             <option value="Completed">Completed</option>
                         </select>
 
-                    </div>
+                    </div> */}
                     <div className="mb-4">
                     <select 
                         value={priority}
