@@ -13,7 +13,7 @@ pygame.display.set_caption("Brownian Motion using PyGame")
 font = pygame.font.SysFont("Arial", 36, bold=True)
 title_text = font.render("Brownian Movement", True, (0, 0, 0))
 
-dot_radius = 10
+dot_radius = 20
 dot_x, dot_y = width // 2, height // 2
 dot_velocity = np.array([speed, 0], dtype=float)
 dot_color = (0, 0, 240)
@@ -48,7 +48,7 @@ while True:
     direction = dot_velocity / np.linalg.norm(dot_velocity)  # Normalize
     end_x = int(dot_x + direction[0] * 20)
     end_y = int(dot_y + direction[1] * 20)
-    pygame.draw.line(screen, (255, 0, 0), (int(dot_x), int(dot_y)), (end_x, end_y), 3)
+    pygame.draw.line(screen, (255, 0, 0), (int(dot_x), int(dot_y)), (end_x, end_y), 5)
 
     pygame.display.flip()
     clock.tick(60)
