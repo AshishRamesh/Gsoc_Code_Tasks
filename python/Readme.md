@@ -4,7 +4,9 @@ A simple visualization of Brownian motion using `pygame`, where a dot continuous
 
 ## Demo
 
-![Brownian Movement Demo](./demo.gif)
+<p align="center">
+  <img src="./demo.gif" alt="Demo Gif" width="600">
+</p>
 
 > The above gif shows a blue dot representing a particle undergoing Brownian motion, with a red arrow indicating its current direction of movement.
 
