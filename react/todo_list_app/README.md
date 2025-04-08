@@ -3,7 +3,7 @@
 A feature-rich Todo List application built using **React** and **Redux Toolkit**. This app supports task management across multiple statuses with a clean UI and drag-and-drop functionality for intuitive updates.
 
 ## Demo
-[Deployed Demo Link](https://todolist-ashishrameshs-projects.vercel.app/)
+[Deployed Demo Link](https://todolistapp-ashishrameshs-projects.vercel.app/)
 
 > Deployed link for the app.
 
