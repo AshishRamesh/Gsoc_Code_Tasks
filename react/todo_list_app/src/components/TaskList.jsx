@@ -76,7 +76,7 @@ const TaskList = () => {
                   {...provided.droppableProps}
                   className="bg-gray-100 rounded-md p-4 shadow-inner min-h-[300px]"
                 >
-                  <h3 className="text-lg font-bold text-center text-indigo-700 mb-2">{columnId}</h3>
+                  <h3 className="text-lg font-bold text-center text-cyan-700 mb-2">{columnId}</h3>
                   {taskList.map((task, index) => (
                     <Draggable draggableId={task.id.toString()} index={index} key={task.id}>
                       {(provided) => (

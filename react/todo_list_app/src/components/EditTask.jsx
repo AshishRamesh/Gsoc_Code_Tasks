@@ -26,14 +26,14 @@ const EditTask = ({task}) => {
         <div>
             {isEdit ? (
                 <div className="absolute bg-white p-4 border rounded-mb shadow-lg z-10">
-                    <h2 className="text-xl font-semibold mb-3 text-indigo-500">Edit Task</h2>
+                    <h2 className="text-xl font-semibold mb-3 text-cyan-500">Edit Task</h2>
                     <div className="mb-4">
                         <input 
                         type="text"
                         placeholder="Task Name"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                         required
                         />
 
@@ -43,7 +43,7 @@ const EditTask = ({task}) => {
                         placeholder="Task Description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                         rows="3">
                         </textarea>
                     </div> 
@@ -62,7 +62,7 @@ const EditTask = ({task}) => {
                     <select 
                         value={priority}
                         onChange={(e) => setPriority(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500">
                         <option value="high">High Priority</option>
                         <option value="medium">Medium Priority</option>
                         <option value="low">Low Priority</option>
@@ -73,7 +73,7 @@ const EditTask = ({task}) => {
                     <select 
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500">
                         <option value="Personal">Personal</option>
                         <option value="Work">Work</option>
                         <option value="Groceries">Groceries</option>

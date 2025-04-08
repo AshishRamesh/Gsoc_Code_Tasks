@@ -17,7 +17,7 @@ function App() {
     return (
         <div className="min-h-screen bg-gray-100 p-4">
           <div className="w-full bg-white shadow-md rounded-md p-6">
-            <h1 className="text-3xl font-bold mb-4 text-center text-indigo-600">Todo List</h1>
+            <h1 className="text-3xl font-bold mb-4 text-center text-cyan-600">Todo List</h1>
       
             {/* Filter + Add Button Row */}
             <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
@@ -28,7 +28,7 @@ function App() {
                     {!showAddTask && (
                     <button
                         onClick={handleAddTaskClick}
-                        className="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-indigo-700"
+                        className="bg-cyan-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-cyan-700"
                     >
                         Add New Task
                     </button>

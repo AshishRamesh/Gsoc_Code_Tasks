@@ -41,14 +41,14 @@ const AddTask = ({ onTaskAdded }) => {
 
     return (
         <form className="mb-6" onSubmit={handleSubmit}>
-            <h2 className="text-xl font-semibold mb-3 text-indigo-500">Add New Task</h2>
+            <h2 className="text-xl font-semibold mb-3 text-cyan-500">Add New Task</h2>
             <div className="mb-4">
                 <input
                     type="text"
                     placeholder="Task Name"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     required
                 />
             </div>
@@ -57,7 +57,7 @@ const AddTask = ({ onTaskAdded }) => {
                     placeholder="Task Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     rows="3"
                 />
             </div>
@@ -78,7 +78,7 @@ const AddTask = ({ onTaskAdded }) => {
                 <select
                     value={priority}
                     onChange={(e) => setPriority(e.target.value)}
-                    className="border p-2 rounded-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="border p-2 rounded-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 >
                     <option value="high">High Priority</option>
                     <option value="medium">Medium Priority</option>
@@ -90,7 +90,7 @@ const AddTask = ({ onTaskAdded }) => {
                 <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="border p-2 rounded-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                    className="border p-2 rounded-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-cyan-500 "
                 >
                     <option value="Personal">Personal</option>
                     <option value="Work">Work</option>
@@ -101,7 +101,7 @@ const AddTask = ({ onTaskAdded }) => {
             
             <button
                 type="submit"
-                className="w-full bg-indigo-600 text-white font-semibold p-2 rounded-md hover:bg-indigo-700"
+                className="w-full bg-cyan-600 text-white font-semibold p-2 rounded-md hover:bg-cyan-700"
             >
                 Add Task
             </button>
